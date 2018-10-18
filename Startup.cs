@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using LJWebsite.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace LJWebsite
 {
@@ -34,9 +36,40 @@ namespace LJWebsite
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<LjWebContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            // services.AddIdentity<IdentityUser,IdentityRole>()
+            //     .AddEntityFrameworkStores<LjWebContext>()
+            //     .AddDefaultTokenProviders();
+            //services.AddDefaultIdentity<IdentityUser>();
+            // adding external providers
+            services.AddAuthentication()
+                .AddGoogle(googleOptions =>{
+                    googleOptions.ClientId=Configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret=Configuration["Authentication:Google:ClientSecret"];
+                })
+                .AddMicrosoftAccount(microsoftOptions =>{
+                    microsoftOptions.ClientId=Configuration["Authentication:Microsoft:ClientId"];
+                    microsoftOptions.ClientSecret=Configuration["Authentication:Microsoft:ClientSecret"];
+                })
+                ;
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddRazorPagesOptions(options => 
+                {
+                    options.AllowAreas =true;
+                    options.Conventions.AuthorizeAreaFolder("Identity","/Account/Manage");
+                    options.Conventions.AuthorizeAreaPage("Identity","/Account/Logout");
+                });
+            
+            services.ConfigureApplicationCookie(options => 
+            {
+                options.LoginPath=$"/Identity/Account/Login";
+                options.LogoutPath=$"/Identity/Account/Logout";
+                options.AccessDeniedPath=$"/Identity/Account/AccesDenied";
+            });
+
+            services.AddSingleton<IEmailSender,EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +87,8 @@ namespace LJWebsite
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
