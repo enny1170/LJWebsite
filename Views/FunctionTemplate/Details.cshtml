@@ -1,0 +1,81 @@
+@model LJWebsite.Models.Entities.FunctionTemplate
+@{
+    ViewData["Title"] = "FunctionTemplate";
+    // create FunctionTemplateData as prototype for list of channels
+    LJWebsite.Models.Entities.FunctionTemplateChannel submodel = new FunctionTemplateChannel();
+}
+
+<div>
+    <h4>Function Template</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ControllerFunction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ControllerFunction.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<hr />
+<h4>Template Channels</h4>
+<p><a asp-action="AddChannel" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil">&nbsp;Add Channel</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            @if(Model.ControllerFunction.Name=="Color"){
+            <th>
+                @Html.DisplayNameFor(model => submodel.Color)
+            </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => submodel.Channel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => submodel.ValueRangeFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => submodel.ValueRangeTo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TemplateChannel) {
+        <tr>
+            @if(Model.ControllerFunction.Name=="Color"){
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.ColorName)
+            </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Channel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueRangeFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueRangeTo)
+            </td>
+            <td>
+                <a asp-action="EditChannel" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil">&nbsp;</a> |
+                <a asp-action="DeleteChannel" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-remove"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

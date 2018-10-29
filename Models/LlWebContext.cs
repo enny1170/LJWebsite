@@ -21,9 +21,16 @@ namespace LJWebsite.Models
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            //builder.Entity<FunctionTemplate>().HasMany<FunctionTemplateData>(f => f.TemplateData);
+            //builder.Entity<FunctionTemplateData>().HasOne<FunctionTemplate>(d => d.FunctionTemplate);
         }
 
         // Register Tables
-        public DbSet<Functionality> Functionality {get; set;}
+        public DbSet<ColorKey> ColorKeys {get; set;}
+        public DbSet<ControllerFunction> ControllerFunctions {get;set;}
+        public DbSet<FunctionTemplate> FunctionTemplates {get;set;}
+        public DbSet<FunctionTemplateChannel> FunctionTemplateChannels {get;set;}
+        public DbSet<FunctionTemplateValue> FunctionTemplateValues { get; set; }
+
     }
 }

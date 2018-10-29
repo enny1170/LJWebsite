@@ -1,4 +1,4 @@
-@model LJWebsite.Models.Entities.Functionality
+@model LJWebsite.Models.Entities.FunctionTemplate
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-<h4>Functionality</h4>
+<h4>FunctionTemplate</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,21 +14,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="ControllerFunctionID" class="control-label"></label>
+                <select asp-for="ControllerFunctionID" class="form-control" asp-items="ViewBag.ControllerFunctionID"></select>
+                <span asp-validation-for="ControllerFunctionID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsMultiChannel" /> @Html.DisplayNameFor(model => model.IsMultiChannel)
-                    </label>
-                </div>
+                <input asp-for="Description" class ="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

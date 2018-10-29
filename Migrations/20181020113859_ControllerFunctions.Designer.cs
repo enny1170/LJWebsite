@@ -3,14 +3,16 @@ using System;
 using LJWebsite.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LJWebsite.Migrations
 {
     [DbContext(typeof(LjWebContext))]
-    partial class LjWebContextModelSnapshot : ModelSnapshot
+    [Migration("20181020113859_ControllerFunctions")]
+    partial class ControllerFunctions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,6 @@ namespace LJWebsite.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("ControllerFunctionID");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
 
                     b.HasKey("ID");
 

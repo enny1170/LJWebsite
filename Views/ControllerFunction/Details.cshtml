@@ -1,4 +1,4 @@
-@model LJWebsite.Models.Entities.Functionality
+@model LJWebsite.Models.Entities.ControllerFunction
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Functionality</h4>
+    <h4>ControllerFunction</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,12 +21,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsMultiChannel)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsMultiChannel)
         </dd>
     </dl>
 </div>

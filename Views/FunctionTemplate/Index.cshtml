@@ -1,0 +1,41 @@
+@model IEnumerable<LJWebsite.Models.Entities.FunctionTemplate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ControllerFunction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ControllerFunction.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil">&nbsp;</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-eye-open">&nbsp;</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-remove"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
