@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +36,10 @@ namespace LJWebsite
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<LjWebContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<LjWebContext>(options => {
+                options
+                .UseSqlite(Configuration.GetConnectionString("DefaultConnection")); //UseLazyLoadingProxies().
+                });
 
             // services.AddIdentity<IdentityUser,IdentityRole>()
             //     .AddEntityFrameworkStores<LjWebContext>()
@@ -70,6 +73,7 @@ namespace LJWebsite
             });
 
             services.AddSingleton<IEmailSender,EmailSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

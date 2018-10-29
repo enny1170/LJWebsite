@@ -5,27 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LJWebsite.Models;
 using LJWebsite.Models.Entities;
+using LJWebsite.Models;
 
 namespace LJWebsite.Controllers
 {
-    public class FunctionalityController : Controller
+    public class ColorKeyController : Controller
     {
         private readonly LjWebContext _context;
 
-        public FunctionalityController(LjWebContext context)
+        public ColorKeyController(LjWebContext context)
         {
             _context = context;
         }
 
-        // GET: Functionality
+        // GET: ColorKey
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Functionality.ToListAsync());
+            return View(await _context.ColorKeys.ToListAsync());
         }
 
-        // GET: Functionality/Details/5
+        // GET: ColorKey/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace LJWebsite.Controllers
                 return NotFound();
             }
 
-            var functionality = await _context.Functionality
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (functionality == null)
+            var colorKey = await _context.ColorKeys
+                .FirstOrDefaultAsync(m => m.ColorID == id);
+            if (colorKey == null)
             {
                 return NotFound();
             }
 
-            return View(functionality);
+            return View(colorKey);
         }
 
-        // GET: Functionality/Create
+        // GET: ColorKey/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Functionality/Create
+        // POST: ColorKey/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description,IsMultiChannel")] Functionality functionality)
+        public async Task<IActionResult> Create([Bind("ColorID,ColorName")] ColorKey colorKey)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(functionality);
+                _context.Add(colorKey);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(functionality);
+            return View(colorKey);
         }
 
-        // GET: Functionality/Edit/5
+        // GET: ColorKey/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace LJWebsite.Controllers
                 return NotFound();
             }
 
-            var functionality = await _context.Functionality.FindAsync(id);
-            if (functionality == null)
+            var colorKey = await _context.ColorKeys.FindAsync(id);
+            if (colorKey == null)
             {
                 return NotFound();
             }
-            return View(functionality);
+            return View(colorKey);
         }
 
-        // POST: Functionality/Edit/5
+        // POST: ColorKey/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,IsMultiChannel")] Functionality functionality)
+        public async Task<IActionResult> Edit(int id, [Bind("ColorID,ColorName")] ColorKey colorKey)
         {
-            if (id != functionality.ID)
+            if (id != colorKey.ColorID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace LJWebsite.Controllers
             {
                 try
                 {
-                    _context.Update(functionality);
+                    _context.Update(colorKey);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FunctionalityExists(functionality.ID))
+                    if (!ColorKeyExists(colorKey.ColorID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace LJWebsite.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(functionality);
+            return View(colorKey);
         }
 
-        // GET: Functionality/Delete/5
+        // GET: ColorKey/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace LJWebsite.Controllers
                 return NotFound();
             }
 
-            var functionality = await _context.Functionality
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (functionality == null)
+            var colorKey = await _context.ColorKeys
+                .FirstOrDefaultAsync(m => m.ColorID == id);
+            if (colorKey == null)
             {
                 return NotFound();
             }
 
-            return View(functionality);
+            return View(colorKey);
         }
 
-        // POST: Functionality/Delete/5
+        // POST: ColorKey/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var functionality = await _context.Functionality.FindAsync(id);
-            _context.Functionality.Remove(functionality);
+            var colorKey = await _context.ColorKeys.FindAsync(id);
+            _context.ColorKeys.Remove(colorKey);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FunctionalityExists(int id)
+        private bool ColorKeyExists(int id)
         {
-            return _context.Functionality.Any(e => e.ID == id);
+            return _context.ColorKeys.Any(e => e.ColorID == id);
         }
     }
 }

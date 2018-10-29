@@ -1,4 +1,4 @@
-@model IEnumerable<LJWebsite.Models.Entities.Functionality>
+@model IEnumerable<LJWebsite.Models.Entities.ControllerFunction>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -17,9 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsMultiChannel)
             </th>
             <th></th>
         </tr>
@@ -34,12 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsMultiChannel)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil">&nbsp;</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-eye-open">&nbsp;</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-remove"></a>
             </td>
         </tr>
 }
