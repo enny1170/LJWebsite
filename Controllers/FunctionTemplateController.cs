@@ -214,5 +214,54 @@ namespace LJWebsite.Controllers
             return View(functionTemplateChannel);
         }
 
+
+        // GET: FunctionTemplate/EditChannel/3
+        public async Task<IActionResult> EditChannel(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var functionTemplateChannel = await _context.FunctionTemplateChannels.FindAsync(id);
+            if (functionTemplateChannel == null)
+            {
+                return NotFound();
+            }
+            
+            ViewData["ColorKeyID"] = new SelectList(_context.ColorKeys, "ColorID", "ColorName");
+            return View(functionTemplateChannel);
+
+        }
+
+        // POST: FunctionTemplate/AddChannel
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditChannel([Bind("ID,FunctionTemplateRefID,ColorKeyId,ValueRangeFrom,ValueRangeTo")] FunctionTemplateChannel functionTemplateChannel)
+        {
+            if (ModelState.IsValid)
+            {
+                FunctionTemplateChannel temp= await _context.FindAsync<FunctionTemplateChannel>(functionTemplateChannel.ID);
+                if(temp == null)
+                    return NotFound();
+                temp.ColorKeyId=functionTemplateChannel.ColorKeyId;
+                temp.ValueRangeFrom=functionTemplateChannel.ValueRangeFrom;
+                temp.ValueRangeTo=functionTemplateChannel.ValueRangeTo;
+                temp.Channel=functionTemplateChannel.Channel;
+                _context.Update(temp);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            // ensure model is fully filled 
+            if(functionTemplateChannel.FunctionTemplate==null)
+                // load dependend Data
+                //_context.Entry(functionTemplateChannel)
+            ViewData["ColorKeyID"] = new SelectList(_context.ColorKeys, "ColorID", "ColorName",functionTemplateChannel.ColorKeyId);
+            return View(functionTemplateChannel);
+        }
+
+
     }
 }
