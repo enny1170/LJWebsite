@@ -92,15 +92,36 @@ namespace LJWebsite.Migrations
                     b.ToTable("FixtureFunctions");
                 });
 
+            modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunctionChannel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Channel");
+
+                    b.Property<int?>("ColorKeyId");
+
+                    b.Property<int?>("FixtureFunctionID");
+
+                    b.Property<int>("ValueRangeFrom");
+
+                    b.Property<int>("ValueRangeTo");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ColorKeyId");
+
+                    b.HasIndex("FixtureFunctionID");
+
+                    b.ToTable("FixtureFunctionChannels");
+                });
+
             modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunctionValue", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ColorKeyId");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
 
                     b.Property<int?>("FixtureFunctionID");
 
@@ -115,8 +136,6 @@ namespace LJWebsite.Migrations
                     b.HasIndex("FixtureFunctionID");
 
                     b.ToTable("FixtureFunctionValues");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("FixtureFunctionValue");
                 });
 
             modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplate", b =>
@@ -138,19 +157,16 @@ namespace LJWebsite.Migrations
                     b.ToTable("FunctionTemplates");
                 });
 
-            modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateValue", b =>
+            modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateChannel", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Channel");
+
                     b.Property<int?>("ColorKeyId");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
-                    b.Property<int>("FunctionTemplateID");
-
-                    b.Property<int?>("FunctionTemplateID2");
+                    b.Property<int>("FunctionTemplateRefID");
 
                     b.Property<int>("ValueRangeFrom");
 
@@ -160,13 +176,31 @@ namespace LJWebsite.Migrations
 
                     b.HasIndex("ColorKeyId");
 
-                    b.HasIndex("FunctionTemplateID");
+                    b.HasIndex("FunctionTemplateRefID");
 
-                    b.HasIndex("FunctionTemplateID2");
+                    b.ToTable("FunctionTemplateChannels");
+                });
+
+            modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateValue", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ColorKeyId");
+
+                    b.Property<int>("FunctionTemplateRefID");
+
+                    b.Property<int>("ValueRangeFrom");
+
+                    b.Property<int>("ValueRangeTo");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ColorKeyId");
+
+                    b.HasIndex("FunctionTemplateRefID");
 
                     b.ToTable("FunctionTemplateValues");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("FunctionTemplateValue");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -330,36 +364,6 @@ namespace LJWebsite.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunctionChannel", b =>
-                {
-                    b.HasBaseType("LJWebsite.Models.Entities.FixtureFunctionValue");
-
-                    b.Property<int>("Channel");
-
-                    b.Property<int?>("FixtureFunctionID1");
-
-                    b.HasIndex("FixtureFunctionID1");
-
-                    b.ToTable("FixtureFunctionChannel");
-
-                    b.HasDiscriminator().HasValue("FixtureFunctionChannel");
-                });
-
-            modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateChannel", b =>
-                {
-                    b.HasBaseType("LJWebsite.Models.Entities.FunctionTemplateValue");
-
-                    b.Property<int>("Channel");
-
-                    b.Property<int?>("FunctionTemplateID1");
-
-                    b.HasIndex("FunctionTemplateID1");
-
-                    b.ToTable("FunctionTemplateChannel");
-
-                    b.HasDiscriminator().HasValue("FunctionTemplateChannel");
-                });
-
             modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunction", b =>
                 {
                     b.HasOne("LJWebsite.Models.Entities.ControllerFunction", "ControllerFunction")
@@ -371,6 +375,17 @@ namespace LJWebsite.Migrations
                         .WithMany("FixtureFunction")
                         .HasForeignKey("FixtureID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunctionChannel", b =>
+                {
+                    b.HasOne("LJWebsite.Models.Entities.ColorKey", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorKeyId");
+
+                    b.HasOne("LJWebsite.Models.Entities.FixtureFunction", "FixtureFunction")
+                        .WithMany("FixtureFunctionChannel")
+                        .HasForeignKey("FixtureFunctionID");
                 });
 
             modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunctionValue", b =>
@@ -392,6 +407,18 @@ namespace LJWebsite.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateChannel", b =>
+                {
+                    b.HasOne("LJWebsite.Models.Entities.ColorKey", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorKeyId");
+
+                    b.HasOne("LJWebsite.Models.Entities.FunctionTemplate", "FunctionTemplate")
+                        .WithMany("TemplateChannel")
+                        .HasForeignKey("FunctionTemplateRefID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateValue", b =>
                 {
                     b.HasOne("LJWebsite.Models.Entities.ColorKey", "Color")
@@ -399,13 +426,9 @@ namespace LJWebsite.Migrations
                         .HasForeignKey("ColorKeyId");
 
                     b.HasOne("LJWebsite.Models.Entities.FunctionTemplate", "FunctionTemplate")
-                        .WithMany()
-                        .HasForeignKey("FunctionTemplateID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("LJWebsite.Models.Entities.FunctionTemplate")
                         .WithMany("TemplateValue")
-                        .HasForeignKey("FunctionTemplateID2");
+                        .HasForeignKey("FunctionTemplateRefID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -451,20 +474,6 @@ namespace LJWebsite.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("LJWebsite.Models.Entities.FixtureFunctionChannel", b =>
-                {
-                    b.HasOne("LJWebsite.Models.Entities.FixtureFunction")
-                        .WithMany("FixtureFunctionChannel")
-                        .HasForeignKey("FixtureFunctionID1");
-                });
-
-            modelBuilder.Entity("LJWebsite.Models.Entities.FunctionTemplateChannel", b =>
-                {
-                    b.HasOne("LJWebsite.Models.Entities.FunctionTemplate")
-                        .WithMany("TemplateChannel")
-                        .HasForeignKey("FunctionTemplateID1");
                 });
 #pragma warning restore 612, 618
         }

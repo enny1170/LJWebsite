@@ -186,7 +186,7 @@ namespace LJWebsite.Controllers
             }
             var tmpChannel=new FunctionTemplateChannel();
             tmpChannel.FunctionTemplate=functionTemplate;
-            tmpChannel.FunctionTemplateID=functionTemplate.ID;
+            tmpChannel.FunctionTemplateRefID=functionTemplate.ID;
             
             ViewData["ColorKeyID"] = new SelectList(_context.ColorKeys, "ColorID", "ColorName");
             return View(tmpChannel);
@@ -198,7 +198,7 @@ namespace LJWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddChannel([Bind("FunctionTemplateID,ColorKeyId,ValueRangeFrom,ValueRangeTo")] FunctionTemplateChannel functionTemplateChannel)
+        public async Task<IActionResult> AddChannel([Bind("FunctionTemplateRefID,ColorKeyId,ValueRangeFrom,ValueRangeTo")] FunctionTemplateChannel functionTemplateChannel)
         {
             if (ModelState.IsValid)
             {

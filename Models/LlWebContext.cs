@@ -23,8 +23,8 @@ namespace LJWebsite.Models
             // Add your customizations after calling base.OnModelCreating(builder);
             //builder.Entity<FunctionTemplate>().HasMany<FunctionTemplateData>(f => f.TemplateData);
             //builder.Entity<FunctionTemplateData>().HasOne<FunctionTemplate>(d => d.FunctionTemplate);
-            builder.Entity<FunctionTemplateValue>().HasOne(f=>f.FunctionTemplate).WithMany().HasForeignKey(c => c.FunctionTemplateID);
-            builder.Entity<FunctionTemplateChannel>().HasOne(c => c.FunctionTemplate).WithMany().HasForeignKey(k => k.FunctionTemplateID);
+            builder.Entity<FunctionTemplateValue>().HasOne(f=>f.FunctionTemplate).WithMany(f => f.TemplateValue);
+            builder.Entity<FunctionTemplateChannel>().HasOne(c => c.FunctionTemplate).WithMany(f => f.TemplateChannel);
         }
 
         // Register Tables

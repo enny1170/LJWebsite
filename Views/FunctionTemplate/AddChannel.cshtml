@@ -5,13 +5,13 @@
 }
 
 <h4>Add Channel</h4>
-<div class="control-label">for Template Id: @Model.FunctionTemplateID, Function: @Model.FunctionTemplate.ControllerFunction.Name, Description: @Model.FunctionTemplate.Description</div>
+<div class="control-label">for Template Id: @Model.FunctionTemplateRefID, Function: @Model.FunctionTemplate.ControllerFunction.Name, Description: @Model.FunctionTemplate.Description</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddChannel">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="FunctionTemplateID" type="hidden" />
+            <input asp-for="FunctionTemplateRefID" type="hidden" />
             <div class="form-group">
                 <label asp-for="Channel" class="control-label"></label>
                 <input asp-for="Channel" class ="form-control" />

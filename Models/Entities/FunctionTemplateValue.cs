@@ -23,8 +23,10 @@ namespace LJWebsite.Models.Entities
         [Key]
         public int ID { get; set; }
 
-        public int FunctionTemplateID { get; set; }
+        public int FunctionTemplateRefID { get; set; }
         private FunctionTemplate functionTemplate;
+
+        [ForeignKey("FunctionTemplateRefID")]
         public virtual FunctionTemplate FunctionTemplate
         {
             get
