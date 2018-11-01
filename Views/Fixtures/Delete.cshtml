@@ -49,9 +49,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" asp-route-id="@Model.ID">&nbsp;<span class="glyphicon glyphicon-remove"></a>
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+       <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left"></span> Back to List</a> 
     </form>
 </div>
