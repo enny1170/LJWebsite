@@ -54,9 +54,6 @@ namespace LJWebsite.Models.Entities
             set { multiChannel = value;}
         }
         
-        //public virtual ControllerFunction ControllerFunction{get;set;}
-        //public virtual ICollection<FunctionTemplateData> TemplateData {get;set;}
-
         private ICollection<FunctionTemplateChannel> _templateChannel;
         public virtual ICollection<FunctionTemplateChannel> TemplateChannel
         {

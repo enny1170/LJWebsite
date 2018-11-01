@@ -14,11 +14,11 @@ namespace LJWebsite.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+/*             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<LjWebContext>(options =>
                     options.UseSqlite(
                         context.Configuration.GetConnectionString("DefaultConnection")));
-
+ */         builder.ConfigureServices((context ,services) =>{
                 services.AddDefaultIdentity<IdentityUser>()
                     .AddEntityFrameworkStores<LjWebContext>();
             });

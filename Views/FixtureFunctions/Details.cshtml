@@ -1,16 +1,21 @@
-@model LJWebsite.Models.Entities.FunctionTemplate
+@model LJWebsite.Models.Entities.FixtureFunction
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h2>Delete</h2>
+<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>FunctionTemplate</h4>
+    <h4>FixtureFunction</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixture)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.ID)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ControllerFunction)
         </dt>
@@ -30,12 +35,8 @@
             @Html.DisplayFor(model => model.MultiChannel)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <br>
-        <br>
-        <a asp-action="Index"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to List</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

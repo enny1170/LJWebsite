@@ -1,4 +1,4 @@
-@model LJWebsite.Models.Entities.FunctionTemplate
+@model LJWebsite.Models.Entities.FixtureFunction
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-<h4>FunctionTemplate</h4>
+<h4>FixtureFunction</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,17 +14,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
+                <label asp-for="FixtureID" class="control-label"></label>
+                <select asp-for="FixtureID" class="form-control" asp-items="ViewBag.FixtureID"></select>
+                <span asp-validation-for="FixtureID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ControllerFunctionID" class="control-label"></label>
                 <select asp-for="ControllerFunctionID" class="form-control" asp-items="ViewBag.ControllerFunctionID"></select>
                 <span asp-validation-for="ControllerFunctionID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class ="form-control"></select>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MultiChannel" class="control-label"></label>
-                <input asp-for="MultiChannel" class ="form-control"></select>
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="MultiChannel" /> @Html.DisplayNameFor(model => model.MultiChannel)
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -34,8 +43,7 @@
 </div>
 
 <div>
-    <br>
-    <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left"></span> Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

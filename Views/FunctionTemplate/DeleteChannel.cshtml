@@ -15,22 +15,22 @@
             <input asp-for="FunctionTemplateRefID" type="hidden" />
             <div class="form-group">
                 <label asp-for="Channel" class="control-label"></label>
-                <input asp-for="Channel" class ="form-control" />
+                <input asp-for="Channel" class ="form-control" disabled/>
             </div>
             @if(@Model.FunctionTemplate.ControllerFunction.Name=="Color")
             {
             <div class="form-group">
                 <label asp-for="ColorKeyId" class="control-label"></label>
-                <select asp-for="ColorKeyId" class ="form-control" asp-items="ViewBag.ColorKeyID"></select>
+                <select asp-for="ColorKeyId" class ="form-control" asp-items="ViewBag.ColorKeyID" disabled></select>
             </div>
             }
             <div class="form-group">
                 <label asp-for="ValueRangeFrom" class="control-label"></label>
-                <input asp-for="ValueRangeFrom" class ="form-control" />
+                <input asp-for="ValueRangeFrom" class ="form-control" disabled/>
             </div>
             <div class="form-group">
                 <label asp-for="ValueRangeTo" class="control-label"></label>
-                <input asp-for="ValueRangeTo" class ="form-control" />
+                <input asp-for="ValueRangeTo" class ="form-control" disabled/>
             </div>
             <div class="form-group">
                 <input type="submit" value="Delete" class="btn btn-default" />
