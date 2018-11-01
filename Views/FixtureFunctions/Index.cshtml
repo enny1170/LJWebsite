@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.MultiChannel)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                 <a asp-action="Edit" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil">&nbsp;</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-eye-open">&nbsp;</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">&nbsp;<span class="glyphicon glyphicon-remove"></a>
             </td>
         </tr>
 }
