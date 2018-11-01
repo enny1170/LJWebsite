@@ -46,7 +46,13 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                <!--@Html.DisplayFor(modelItem => item.ImageUrl)-->
+                @if(item.ImageUrl != "")
+                {
+                    <a href="@item.ImageUrl">
+                    <img src="@item.ImageUrl" alt="image" class="img-responsive" width="100" height="75"/>
+                    </a>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ManualUrl)
