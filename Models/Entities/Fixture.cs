@@ -43,7 +43,9 @@ namespace LJWebsite.Models.Entities
         [StringLength(50)]
         public string PartNr { get; set; }
         public string Description { get; set; }
+        [Display(Name="Image")]
         public string ImageUrl { get; set; }
+        [Display(Name="Manual")]
         public string ManualUrl { get; set; }
         [Required]
         [Display(Name="Channels / Mode")]

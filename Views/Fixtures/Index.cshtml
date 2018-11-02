@@ -49,13 +49,17 @@
                 <!--@Html.DisplayFor(modelItem => item.ImageUrl)-->
                 @if(item.ImageUrl != "")
                 {
-                    <a href="@item.ImageUrl">
+                    <a href="@item.ImageUrl" target="_blank">
                     <img src="@item.ImageUrl" alt="image" class="img-responsive" width="100" height="75"/>
                     </a>
                 }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ManualUrl)
+                <!--@Html.DisplayFor(modelItem => item.ManualUrl)-->
+                @if(item.ManualUrl != "")
+                {
+                    <a href="@item.ManualUrl" target="_blank">Manual</a>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaxChannels)
