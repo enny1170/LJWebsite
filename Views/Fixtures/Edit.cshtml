@@ -32,13 +32,13 @@
                 <label asp-for="ImageUrl" class="control-label"></label>
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                <h5><small>please enter URL for the Image luca war hier und hat hunger</small></h5>
+                <h5><small>please enter URL for the Image</small></h5>
             </div>
             <div class="form-group">
                 <label asp-for="ManualUrl" class="control-label"></label>
                 <input asp-for="ManualUrl" class="form-control" />
                 <span asp-validation-for="ManualUrl" class="text-danger"></span>
-             <h5><small> ples ManualUrl frome internet luca war hier und hat hunger</small></h5>
+             <h5><small> please enter URL for the Manual</small></h5>
             
             </div>
             <div class="form-group">
@@ -54,7 +54,8 @@
 </div>
 
 <div>
-    <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left"></span> Back to List</a> 
+     <a asp-action="Edit" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil">&nbsp;</a> |
+      <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left"></span> Back to List</a> 
 </div>
 
 @section Scripts {
