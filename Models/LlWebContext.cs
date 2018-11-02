@@ -25,6 +25,8 @@ namespace LJWebsite.Models
             //builder.Entity<FunctionTemplateData>().HasOne<FunctionTemplate>(d => d.FunctionTemplate);
             builder.Entity<FunctionTemplateValue>().HasOne(f=>f.FunctionTemplate).WithMany(f => f.TemplateValue);
             builder.Entity<FunctionTemplateChannel>().HasOne(c => c.FunctionTemplate).WithMany(f => f.TemplateChannel);
+            //builder.Entity<FixtureFunctionValue>().HasOne( v => v.FixtureFunction).WithMany(f => f.FixtureFunctionValue);
+            //builder.Entity<FixtureFunctionChannel>().HasOne( c => c.FixtureFunction).WithMany( f => f.FixtureFunctionChannel);
         }
 
         // Register Tables
@@ -38,6 +40,8 @@ namespace LJWebsite.Models
         public DbSet<FixtureFunction> FixtureFunctions { get; set; }
         public DbSet<FixtureFunctionChannel> FixtureFunctionChannels { get; set; }
         public DbSet<FixtureFunctionValue> FixtureFunctionValues { get; set; }
+
+        public DbSet<Category> Category { get; set; }
 
     }
 }

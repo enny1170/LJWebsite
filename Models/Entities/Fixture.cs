@@ -49,5 +49,20 @@ namespace LJWebsite.Models.Entities
         [Display(Name="Channels / Mode")]
         public int MaxChannels { get; set; }
 
+        private Category _category;
+        public virtual Category Category
+        {
+            get
+            {
+                 System.Diagnostics.Trace.WriteLine($"Warning: Lazy Loading {nameof(Category)}");
+                 _lazyLoader?.Load(this,ref _category);
+                 return _category;
+            }
+            set
+            {
+                 _category = value;
+            }
+        }
+
     }
 }
